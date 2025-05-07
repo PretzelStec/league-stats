@@ -3,9 +3,9 @@
 import { getAllPlayers, getAllPlayerStats, PlayerStat } from "@/repository";
 
 export default async function Home() {
-
     const stats = await getAllPlayerStats();
     const players = await getAllPlayers();
+
     const playerIdToNameAndTagLine = new Map<string, { displayName: string; tagLine: string }>();
     players.forEach((player) => {
         playerIdToNameAndTagLine.set(player.playerId, {
