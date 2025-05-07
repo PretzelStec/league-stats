@@ -50,14 +50,14 @@ function MatchesByPlayers({ matchesByPlayerArray, playerIdToNameAndTagLine }: { 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px]">
             { Object.keys(matchesByPlayerArray).map((player: string) => (
-                <div key={player} className="flex flex-col gap-[8px] bg-amber-950 p-8">
+                <div key={player} className="flex flex-col gap-[8px] bg-amber-950 p-4">
                     <h2 className="text-[24px] font-bold">{playerIdToNameAndTagLine.get(player)?.displayName}</h2>
                     {
                         matchesByPlayerArray[player].map((stat) => (
-                            <div className="flex flex-row gap-[8px]" key={stat.playerId + stat.gameId}>
-                                <p className="text-[16px]">{stat.position} - </p>
-                                <p className="text-[16px]">K/D/A: {stat.kills}/{stat.deaths}/{stat.assists}</p>
-                                { stat.position === "SUPPORT" ? <p className="text-[16px]">Vis: {stat.visionScore}</p> : null }
+                            <div className="flex bg-[#0a0a0a] rounded-xl p-[6px] pr-[10px] pl-[10px] flex-row gap-[20px] justify-between" key={stat.playerId + stat.gameId}>
+                                <p className="text-[16px]">{stat.position}</p>
+                                <p className="text-[16px]">{stat.kills}/{stat.deaths}/{stat.assists}</p>
+                                <p className="text-[16px]">Vis: {stat.visionScore}</p>
                             </div>
                         ))
                     }
@@ -71,14 +71,14 @@ function MatchesByPosition({ matchesByPositionArray, playerIdToNameAndTagLine }:
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px]">
             { Object.keys(matchesByPositionArray).map((position: string) => (
-                <div key={position} className="flex flex-col gap-[8px] bg-amber-950 p-8">
+                <div key={position} className="flex flex-col gap-[8px] bg-amber-950 p-4">
                     <h2 className="text-[24px] font-bold">{position}</h2>
                     {
                         matchesByPositionArray[position].map((stat) => (
-                            <div className="flex flex-row gap-[8px]" key={stat.playerId + stat.gameId}>
-                                <p className="text-[16px]">{playerIdToNameAndTagLine.get(stat.playerId)?.displayName} - </p>
-                                <p className="text-[16px]">K/D/A: {stat.kills}/{stat.deaths}/{stat.assists}</p>
-                                { stat.position === "SUPPORT" ? <p className="text-[16px]">Vis: {stat.visionScore}</p> : null }
+                            <div className="flex bg-[#0a0a0a] rounded-xl p-[6px] pr-[10px] pl-[10px] flex-row gap-[20px] justify-between" key={stat.playerId + stat.gameId}>
+                                <p className="text-[16px]">{playerIdToNameAndTagLine.get(stat.playerId)?.displayName}</p>
+                                <p className="text-[16px]">{stat.kills}/{stat.deaths}/{stat.assists}</p>
+                                <p className="text-[16px]">Vis: {stat.visionScore}</p>
                             </div>
                         ))
                     }
