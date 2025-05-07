@@ -1,3 +1,4 @@
+import { cache } from "@/infrastructure/cache";
 import { PlayerStat } from ".";
 import { findDocument, findDocuments } from "../../infrastructure/mongo";
 
@@ -7,6 +8,14 @@ export async function getPlayerStatByGameAndPlayerId(playerId: string, gameId: n
 }
 
 export async function getAllPlayerStats(): Promise<PlayerStat[]> {
+    if (cache.has("player-stats")) {
+        return cache.get("player-stats") as PlayerStat[];
+    }
+    // track performance of fetch
+    const start = performance.now();
     const playerStats = await findDocuments<PlayerStat>("player-stats", {});
+    const end = performance.now();
+    console.log(`Fetched player stats in ${end - start}ms`);
+    cache.set("player-stats", playerStats);
     return playerStats;
 }
